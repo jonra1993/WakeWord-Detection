@@ -18,7 +18,7 @@ class PyAudioInput:
         self,
         sample_rate: int,
         frame_width: int,
-        exception_on_overflow: bool = True,
+        exception_on_overflow: bool = False,
         **kwargs
     ) -> None:
         self._frame_size = int(sample_rate / 1000 * frame_width)

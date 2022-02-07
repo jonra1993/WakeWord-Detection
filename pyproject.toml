@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "wakeword-detection"
+version = "0.1.0"
+description = ""
+authors = ["jonra1993 <jon_ra@hotmail.es>"]
+
+[tool.poetry.dependencies]
+python = ">=3.8, <3.11"
+numpy = "^1.22.2"
+librosa = "^0.9.0"
+tensorflow = "^2.8.0"
+tqdm = "^4.62.3"
+scikit-learn = "^1.0.2"
+matplotlib = "^3.5.1"
+h5py = "^3.6.0"
+webrtcvad = "^2.0.10"
+graphviz = "^0.19.1"
+grep = "^0.3.2"
+torch = "^1.10.2"
+torchaudio = "^0.10.2"
+"pyannote.audio" = "^1.1.2"
+pydub = "^0.25.1"
+keras-tuner = "^1.1.0"
+PyAudio = "^0.2.11"
+ffmpeg = "^1.4"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
