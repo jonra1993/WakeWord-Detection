@@ -100,6 +100,7 @@ class RingBuffer:
         if self.is_full:
             raise IndexError("Buffer is full")
 
+        print('item.dtype', item.shape)
         self._buffer[self._write] = item
         self._write = (self._write + 1) % self._max_length
 

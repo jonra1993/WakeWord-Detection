@@ -133,3 +133,5 @@ dmypy.json
 
 # swap files
 *.swp
+
+models

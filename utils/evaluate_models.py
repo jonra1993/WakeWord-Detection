@@ -137,10 +137,12 @@ def plot_wav_and_posterior(wav, posteriors, sample_rate,
 def testset_files(base_path):
 
     # find all wav file paths from testset
-    json_path = base_path + "test.json"
+    json_path = base_path + "test.json"    
     test_data = json.load(open(json_path, 'r'))
-    wakeword_files = [base_path + path["audio_file_path"] for path in test_data if path["is_hotword"]]
-    not_wakeword_files = [base_path + path["audio_file_path"] for path in test_data if not path["is_hotword"]]
+    # wakeword_files = [base_path + path["audio_file_path"] for path in test_data if path["is_hotword"]]
+    # not_wakeword_files = [base_path + path["audio_file_path"] for path in test_data if not path["is_hotword"]]
+    wakeword_files = [path["audio_file_path"] for path in test_data if path["is_hotword"]]
+    not_wakeword_files = [path["audio_file_path"] for path in test_data if not path["is_hotword"]]
 
     return wakeword_files, not_wakeword_files
 
@@ -261,7 +263,7 @@ def parse_args():
                         default='/Users/amie/Desktop/OHSU/CS606 - Deep Learning II/FinalProject/WakeWord-Detection/wwdetect/CRNN/models/Arik_CRNN_data_original/',
                         help='Directory where trained models are stored.')
     parser.add_argument('--data_dir', type=str, default='data/hey_snips_research_6k_en_train_eval_clean_ter/',
-                        help='Directory with Hey Snips raw dataset')
+                        help='Directory with Hey Snips raw dataset')                      
     parser.add_argument('--eval_dir', type=str, default='data/evaluation/',
                         help='Directory to save and load concatenated wav files from')
     parser.add_argument('--pos_samples', type=str, default='hey_snips_long.wav',

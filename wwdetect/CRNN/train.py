@@ -12,7 +12,7 @@ from tensorflow.keras import optimizers, metrics, losses, backend
 from tensorflow.keras.callbacks import EarlyStopping, \
     ReduceLROnPlateau, \
     ModelCheckpoint
-from kerastuner.tuners import Hyperband
+from keras_tuner import Hyperband
 
 from model import Arik_CRNN, Arik_CRNN_CTC
 from dataloader import HeySnipsPreprocessed
@@ -231,6 +231,7 @@ def train_basic(training_generator, dev_generator, early_stopping=False, ctc=Fal
     inference_model.build(input_shape=(1, INPUT_SHAPE_FEATURES, INPUT_SHAPE_FRAMES, 1))
     inference_model.load_weights("for_inference.ckpt")
     inference_model.save_separate()
+    print('here')
     inference_model.save_to_tflite()
 
     return inference_model

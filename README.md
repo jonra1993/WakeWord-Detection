@@ -20,13 +20,15 @@ Training and evaluation scripts for wake word detection DNN models.
 
 - Preprocess Original Hey-Snips Dataset:
   
-    > python utils/preprocess_dataset.py --data_dir \<path to original dataset> --out_dir \<path to save updated data>
+    > python utils/preprocess_dataset.py --data_dir \<path to original dataset> --out_dir \<path to save updated data>    
+    python utils/preprocess_dataset.py --data_dir /Users/jona/Documents/Github/Community/WakeWord-Detection/models/bird --out_dir models/bird_clean
     
     * The purpose of this module is to create a refined version of the original 'hey snips' dataset from Sonos. The first step is to use a VAD to identify the speech content in the signal, and remove silence from the onset and offset. This will be done for all splits, train, test, and development. The script assumes path to the original dataset conforms to the directory structure provided by the dataset publishers. The second step then takes the new train samples and, for each positive sample, selects a segment corresponding to 40-60% of the offset of the original signal, and replaces it with silence or speech from a negative sample. These are then saved out into a separate folder in the 'out_dir' directory called 'enhanced_train_negative'.
     
 - Create Datasets for Training, Validation and Testing as H5 vectors:   
   
-    > python utils/filter_dataset_to_h5.py --data_dir \<path to dataset> --models_dir \<path to filter.tflite> 
+    > python utils/filter_dataset_to_h5.py --data_dir \<path to dataset> --models_dir \<path to filter.tflite>
+    python utils/filter_dataset_to_h5.py --data_dir /Users/jona/Documents/Github/Community/WakeWord-Detection/models/bird_clean/silero --out_dir data_new -wake_word bird
     
     * The purpose of this module is to convert all time domain audio in the datasets to mel-filter banks and save the training vectors and associated labels to H5    files for efficient loading during training.
     
@@ -38,6 +40,7 @@ Training and evaluation scripts for wake word detection DNN models.
   Train CRNN, evaluate metrics, and output tflite models:
   
     > python wwdetect/CRNN/train.py --data_dir \<path to dataset>
+    python wwdetect/CRNN/train.py --data_dir data_new
     
     * Script to run CRNN training, automatically output both standard model files and tflite files. Supplies basic metrics for final model on test data. Model hyperparameters can be adjusted via variables at top of file. 
 
@@ -60,6 +63,7 @@ Training and evaluation scripts for wake word detection DNN models.
  - Evaluate models using FAR/FRR:
   
     > python utils/evaluate_models.py --model_type \<CRNN or Wavenet> --models_dir \<path to tflite models> --data_dir \<path to hey snips dataset> 
+    python utils/evaluate_models.py --models_dir data_new/tflite --data_dir models/bird_clean/silero/
     
     * The purpose of this module is to evaluate the false rejection rate and false alarms per hour of the given model
     
